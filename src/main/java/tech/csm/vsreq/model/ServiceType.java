@@ -1,7 +1,6 @@
 package tech.csm.vsreq.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,26 +12,19 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-
-
 @Entity
-@Table(name="manufacturer")
+@Table(name="service_type")
 @Getter
 @Setter
 @ToString
 
-
-public class Manufacturer implements Serializable {
+public class ServiceType implements Serializable {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)	
-	@Column(name="manufacturer_id")
-	private Integer manufacturerId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="service_type_id")
+	private Integer serviceTypeId;
 	
-	@Column(name="manufacturer_name")
-	private String manufacturerName;
-	
-	@Column(name="created_at")
-	private LocalDate createdAt;
-	
+	@Column(name="service_type_name")
+	private String serviceTypeName;
 
 }

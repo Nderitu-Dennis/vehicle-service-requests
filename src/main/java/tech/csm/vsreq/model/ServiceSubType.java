@@ -1,7 +1,6 @@
 package tech.csm.vsreq.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,25 +15,23 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="model")
+@Table(name="service_subtype")
 @Getter
 @Setter
 @ToString
-public class Model implements Serializable {
+
+public class ServiceSubType implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
-	@Column(name="model_id")
-	private Integer modelId;
+	@Column(name="service_subtype_id")
+	private Integer serviceSubtypeId;
 	
 	@ManyToOne
-	@JoinColumn(name="manufacturer_id")
-	private Manufacturer manufacturer;  //many models can belong to one manufacturer
+	@JoinColumn(name="service_type_id")
+	private ServiceType servicetype;  //many sub types belong to one service type
 	
-	@Column(name="model_name")
-	private String modelName;
-	
-	@Column(name="created_at")
-	private LocalDate createdAt;
+	@Column(name="service_subtype_name")
+	private String serviceSubtypeName;
 	
 
 }
