@@ -31,13 +31,20 @@
 			<div class="card-header h2 bg-info">Vehicle Service Request
 				Form</div>
 			<div class="card-body">
-				<form id="serviceRequestForm" action="./save-request" method="post">
+				<form id="serviceRequestForm" action="./save" method="post">
 					<!-- manufacturer Dropdown -->
 					<div class="row">
+					
+											
+					<!-- customer name -->
+					<div class="col-4 mb-3">
+					<label for="customerName" class="font-weight-bold">Customer Name</label>
+					<input type="text" name="customerName" id="customerName" class="form-control" required>
+					</div>
 
-						<div class="col-6 mb-3">
+						<div class="col-4 mb-3">
 							<label for="manufacturerId" class="font-weight-bold">Manufacturer</label>
-							<select id="manufacturerId" name="manufacturerId"
+							<select id="manufacturerId" name="manufacturer.manufacturerId"
 								class="form-control" required>
 								<option value="">-select-</option>
 								<c:forEach items="${manufacturers}" var="m">
@@ -49,9 +56,9 @@
 						</div>
 
 						<!-- model Dropdown -->
-						<div class="col-6 mb-3">
+						<div class="col-4 mb-3">
 							<label for="modelId" class="font-weight-bold">Model</label> <select
-								id="modelId" name="modelId" class="form-control" required>
+								id="modelId" name="vehicleModel.modelId" class="form-control" required>
 								<option value="">-select-</option>
 							</select>
 							<div class="invalid-feedback">Please select a model</div>
@@ -63,7 +70,7 @@
 						<div class="col-6 mb-3">
 							<label for="serviceTypeId" class="font-weight-bold">Service
 								Type </label> <select id="serviceTypeId"
-								name="serviceType.serviceTypeName" class="form-control" required>
+								name="serviceType.serviceTypeId" class="form-control" required>
 								<!-- check on this object things -->
 								<option value="">-select-</option>
 								<c:forEach items="${serviceTypes}" var="s">
@@ -80,7 +87,7 @@
 						<div class="col-6 mb-3">
 							<label for="serviceSubTypeId" class="font-weight-bold">Service
 								Sub Type</label> <select id="serviceSubTypeId"
-								name=serviceSubType.serviceSubTypeName class="form-control"
+								name="serviceSubType.serviceSubTypeId" class="form-control"
 								required>
 								<option value="">-select-</option>
 							</select>
@@ -110,7 +117,7 @@ s								  <option value="${p}">${p}</option>
              Otherwise hide it.-->
 						<div class="col-4 mb-3" id="scheduledDateWrapper" style="display:none;">
 					    <label for="scheduledDate" class="font-weight-bold">Schedule date</label>
-							    <input type="date" name="scheduledDate" id="scheduledDate" class="form-control" required>
+							    <input type="date" name="scheduledDate" id="scheduledDate" class="form-control">
 						</div>
 
 
@@ -120,14 +127,12 @@ s								  <option value="${p}">${p}</option>
 							<label for="attachmentPathId" class="font-weight-bold">Upload
 								any vehicle file</label> 
 								<input type="file" name=attachmentPathId
-								class="form-control" required>
+								class="form-control" >
 							<div class="invalid-feedback">Please upload a file</div>
 
 
 						</div>
 					</div>
-
-
 
 
 					<div class="text-center mt-3">
