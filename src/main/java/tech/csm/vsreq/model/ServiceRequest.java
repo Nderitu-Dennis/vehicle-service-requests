@@ -42,7 +42,7 @@ public class ServiceRequest implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="model_id")
-	private Model model;
+	private VehicleModel vehicleModel;
 
 	@ManyToOne
 	@JoinColumn(name="service_type_id")

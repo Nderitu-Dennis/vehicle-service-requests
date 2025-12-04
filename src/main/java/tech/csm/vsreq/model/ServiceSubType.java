@@ -24,14 +24,14 @@ public class ServiceSubType implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	@Column(name="service_subtype_id")
-	private Integer serviceSubtypeId;
+	private Integer serviceSubTypeId;
 	
 	@ManyToOne
 	@JoinColumn(name="service_type_id")
-	private ServiceType servicetype;  //many sub types belong to one service type
+	private ServiceType serviceType;  //many sub types belong to one service type
 	
 	@Column(name="service_subtype_name")
-	private String serviceSubtypeName;
+	private String serviceSubTypeName;
 	
 
 }

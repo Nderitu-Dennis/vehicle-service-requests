@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Leave Application Form</title>
+<title>Vehicle Service Request Form</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	crossorigin="anonymous">
@@ -28,72 +28,107 @@
 		</c:if>
 
 		<div class="card">
-			<div class="card-header h2 bg-info">Leave Application Form</div>
+			<div class="card-header h2 bg-info">Vehicle Service Request
+				Form</div>
 			<div class="card-body">
-				<form id="leaveForm" action="./save-application" method="post">
-					<!-- Department Dropdown -->
+				<form id="serviceRequestForm" action="./save-request" method="post">
+					<!-- manufacturer Dropdown -->
 					<div class="row">
-						<div class="col-4 mb-3">
-							<label for="departmentId" class="font-weight-bold">Department</label>
-							<select id="departmentId" name="departmentId"
+
+						<div class="col-6 mb-3">
+							<label for="manufacturerId" class="font-weight-bold">Manufacturer</label>
+							<select id="manufacturerId" name="manufacturerId"
 								class="form-control" required>
 								<option value="">-select-</option>
-								<c:forEach items="${departments}" var="d">
-									<option value="${d.departmentId}">${d.departmentName}</option>
+								<c:forEach items="${manufacturers}" var="m">
+									<option value="${m.manufacturerId}">${m.manufacturerName}</option>
 
 								</c:forEach>
 							</select>
 							<div class="invalid-feedback">Please select a department</div>
 						</div>
 
-						<!-- Employee Dropdown -->
-						<div class="col-4 mb-3">
-							<label for="employeeId" class="font-weight-bold">Employee</label>
-							<select id="employeeId" name="employee.employeeId"
-								class="form-control" required>
+						<!-- model Dropdown -->
+						<div class="col-6 mb-3">
+							<label for="modelId" class="font-weight-bold">Model</label> <select
+								id="modelId" name="modelId" class="form-control" required>
 								<option value="">-select-</option>
 							</select>
-							<div class="invalid-feedback">Please select an employee</div>
+							<div class="invalid-feedback">Please select a model</div>
 						</div>
+					</div>
 
-						<!-- Leave Type Dropdown -->
-						<div class="col-4 mb-3">
-							<label for="leaveTypeId" class="font-weight-bold">Leave
-								Type</label> <select id="leaveTypeId" name="leaveType.leaveTypeId"
-								class="form-control" required>
+					<div class="row">
+						<!-- service type Dropdown -->
+						<div class="col-6 mb-3">
+							<label for="serviceTypeId" class="font-weight-bold">Service
+								Type </label> <select id="serviceTypeId"
+								name="serviceType.serviceTypeName" class="form-control" required>
 								<!-- check on this object things -->
 								<option value="">-select-</option>
+								<c:forEach items="${serviceTypes}" var="s">
+									<option value="${s.serviceTypeId}">${s.serviceTypeName}</option>
+
+								</c:forEach>
 							</select>
-							<div class="invalid-feedback">Please select a leave type</div>
+							<div class="invalid-feedback">Please select service type
+								name</div>
 						</div>
-					</div>
 
-					<!-- From and To Dates -->
-					<div class="row">
-						<div class="col-4 mb-3">
-							<label for="fromDate" class="font-weight-bold">From Date</label>
-							<input type="date" id="fromDate" name="fromDate"
-								class="form-control" value="${leaveApplication.fromDate}"
+
+						<!--service sub type -->
+						<div class="col-6 mb-3">
+							<label for="serviceSubTypeId" class="font-weight-bold">Service
+								Sub Type</label> <select id="serviceSubTypeId"
+								name=serviceSubType.serviceSubTypeName class="form-control"
 								required>
-							<div class="invalid-feedback">Please select start date</div>
+								<option value="">-select-</option>
+							</select>
+							<div class="invalid-feedback">Please select service sub
+								type</div>
 						</div>
+
+					</div>
+
+					<div class="row">
+
+						<!-- enum priority -->
 
 						<div class="col-4 mb-3">
-							<label for="toDate" class="font-weight-bold">To Date</label> <input
-								type="date" id="toDate" name="toDate" class="form-control"
-								value="${leaveApplication.toDate}" required>
-							<div class="invalid-feedback">Please select end date</div>
+							<label for="priority" class="font-weight-bold">Priority</label>
+							 <select name="priority" id="priority" class="form-control" required>
+								<option value="">-select-</option>
+								<c:forEach var="p" items="${priorities}">
+s								  <option value="${p}">${p}</option>
+								</c:forEach>
+							</select>
+							<div class="invalid-feedback">Please select a priority</div>
+						</div>
+
+						<!-- date-->
+						<!--Conditional UI Field: If Priority = "SCHEDULED" → show Date picker
+             Otherwise hide it.-->
+						<div class="col-4 mb-3" id="scheduledDateWrapper" style="display:none;">
+					    <label for="scheduledDate" class="font-weight-bold">Schedule date</label>
+							    <input type="date" name="scheduledDate" id="scheduledDate" class="form-control" required>
+						</div>
+
+
+						<!-- attachment-->
+
+						<div class="col-4 mb-3">
+							<label for="attachmentPathId" class="font-weight-bold">Upload
+								any vehicle file</label> 
+								<input type="file" name=attachmentPathId
+								class="form-control" required>
+							<div class="invalid-feedback">Please upload a file</div>
+
+
 						</div>
 					</div>
 
-					<!-- Reason -->
-					<div class="col-8 mb-3">
-						<label for="reason" class="font-weight-bold">Reason for
-							Leave</label>
-						<textarea id="reason" name="reason" rows="4" class="form-control"
-							required>${leaveApplication.reason}</textarea>
-						<div class="invalid-feedback">Please provide a reason</div>
-					</div>
+
+
 
 					<div class="text-center mt-3">
 						<input type="submit" class="btn btn-success" value="Save">
@@ -105,10 +140,31 @@
 			</div>
 		</div>
 
-		<div class="h3 text-warn m-5">
-			Click <a href="./get-applied-leaves"> here </a> view applied leaves
-		</div>
+
 	</div>
+
+	<div class="h3 text-warn m-5">
+		Click <a href="./get-applied-leaves"> here </a> to view requests
+	</div>
+	
+	<!-- script for conditional UI if priority='scheduled' show date -->
+	<script>
+    document.getElementById("priority").addEventListener("change", function () {
+        const selected = this.value;
+        const dateWrapper = document.getElementById("scheduledDateWrapper");
+        const dateInput = document.getElementById("scheduledDate");
+
+        if (selected === "SCHEDULED") {
+            dateWrapper.style.display = "block";
+            dateInput.required = true;
+        } else {
+            dateWrapper.style.display = "none";
+            dateInput.required = false;
+            dateInput.value = "";
+        }
+    });
+</script>
+	
 
 	<script src="https://code.jquery.com/jquery-2.2.4.js"
 		crossorigin="anonymous"></script>
@@ -133,26 +189,25 @@
 
 	<script type="text/javascript">
 	
-	<!--initial real AJAX-->
+	<!-- AJAX-->
 
-	$("#departmentId").change(function(e){
+	$("#manufacturerId").change(function(e){
 		
 		$.ajax({
-			  url: "http://localhost:8090/emp/employees-by-department-id", //backend endpoint
+			  url: "http://localhost:8090/vsreqs/requests/models", //backend endpoint
 			  type: "GET",  //GET req-params appended to the url & fetched by #RequestParam
 			  data: {
-				  departmentId : $(this).val()		     
+				  manufacturerId : $(this).val()		     
 			  },
 			  success: function(response) { //returns JSON response
 				  console.log(response)
 				  
-			      var employeeId=$("#employeeId");  
-			      $(employeeId).find("option").remove(); //clears all existing options
-			      $(employeeId).append("<option value='0'>-select-</option>") //adds the default select option
+			      var modelId=$("#modelId");  
+			      $(modelId).find("option").remove(); //clears all existing options
+			      $(modelId).append("<option value='0'>-select-</option>") //adds the default select option
 				  $(response).each(function(i,e){
 					  //loops thru each object in the JSON res, i is index & e is teams object here
-					      var fullName = e.firstName + (e.lastName ? " " + e.lastName : "");
-					      $(employeeId).append("<option value='"+e.employeeId+"'>"+fullName+"</option>");
+					      $(modelId).append("<option value='"+e.modelId+"'>"+e.modelName+"</option>");
 			      });
 			  },
 			  error: function(xhr, status, error) {
@@ -163,22 +218,22 @@
 
 	
 
-$("#employeeId").change(function(e){
+$("#serviceTypeId").change(function(e){
 		
 		$.ajax({
-			  url: "http://localhost:8090/emp/leave-types-by-employee-id",
+			  url: "http://localhost:8090/vsreqs/requests/subtypes",
 			  type: "GET",
 			  data: {
-			      employeeId: $(this).val()		     
+				  serviceTypeId: $(this).val()		     
 			  },
 			  success: function(response) {
 				  console.log(response)
 				  
-			      var leaveTypeId=$("#leaveTypeId");
-			      $(leaveTypeId).find("option").remove();
-			      $(leaveTypeId).append("<option value='0'>-select-</option>")
+			      var serviceSubTypeId=$("#serviceSubTypeId");
+			      $(serviceSubTypeId).find("option").remove();
+			      $(serviceSubTypeId).append("<option value='0'>-select-</option>")
 				  $(response).each(function(i,e){
-			    	  $(leaveTypeId).append("<option value="+e.leaveTypeId+">"+e.leaveTypeName+"</option>");
+			    	  $(serviceSubTypeId).append("<option value="+e.serviceSubTypeId+">"+e.serviceSubTypeName+"</option>");
 			      });
 			  },
 			  error: function(xhr, status, error) {
@@ -240,11 +295,11 @@ $("#employeeId").change(function(e){
 	<!--Keep change events for dynamic updates-->
 	<!--
 	$("#departmentId").change(function(){
-	    loadTeams($(this).val(), 0, 0); // new selection → no pre-selection
+	    loadTeams($(this).val(), 0, 0); // new selection â no pre-selection
 	});
 
 	$("#teamId").change(function(){
-	    loadProjects($(this).val(), 0); // new selection → no pre-selection
+	    loadProjects($(this).val(), 0); // new selection â no pre-selection
 	});
 
 
