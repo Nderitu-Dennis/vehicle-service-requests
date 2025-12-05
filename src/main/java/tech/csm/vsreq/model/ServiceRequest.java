@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,6 +56,7 @@ public class ServiceRequest implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Priority priority;
 	
+	@FutureOrPresent(message="scheduled date cannot be in the past")
 	@Column(name="scheduled_date")
 	private LocalDate scheduledDate;
 	
@@ -62,7 +64,7 @@ public class ServiceRequest implements Serializable {
 	private String attachmentPath;
 	
 	@Column(name="created_at")
-	private LocalDateTime createdAt;
+	private LocalDateTime createdAt = LocalDateTime.now();
 	
 	
 	

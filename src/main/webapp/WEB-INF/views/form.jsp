@@ -19,13 +19,18 @@
 				<span class='font-weight-bold'>Message: </span> ${msg}
 			</div>
 		</c:if>
-
-		<!-- Error Message -->
-		<c:if test="${dateErrorMsg ne null}">
+		
+			<!-- validation errors Message -->
+		<c:if test="${validationErrors ne null}">
 			<div id='errorAlert' class='alert alert-danger' role="alert">
-				<span class='font-weight-bold'>Error: </span> ${dateErrorMsg}
+			   <ul>
+            <c:forEach var="err" items="${validationErrors}">
+               <li>   Error: ${err.defaultMessage}</li>
+            </c:forEach>
+        </ul>
 			</div>
 		</c:if>
+
 
 		<div class="card">
 			<div class="card-header h2 bg-info">Vehicle Service Request
@@ -174,7 +179,7 @@ s								  <option value="${p}">${p}</option>
 	<script src="https://code.jquery.com/jquery-2.2.4.js"
 		crossorigin="anonymous"></script>
 	<script>
-        // auto hide messages
+        // auto hide success and error  msgs
         document.addEventListener("DOMContentLoaded", function(){
             var al = document.querySelector("#successAlert");
             if(al != null){
