@@ -44,7 +44,12 @@
 					<!-- customer name -->
 					<div class="col-4 mb-3">
 					<label for="customerName" class="font-weight-bold">Customer Name</label>
-					<input type="text" name="customerName" id="customerName" class="form-control" required>
+					<input type="text" name="customerName" id="customerName" 
+					class="form-control"
+					 required
+					 minlength="3"
+					 pattern="[A-Za-z\s]+"
+					 title="Must contain only letters and at least 3 characters ">
 					</div>
 
 						<div class="col-4 mb-3">
@@ -190,7 +195,7 @@ s								  <option value="${p}">${p}</option>
         document.addEventListener("DOMContentLoaded", function(){
             var al = document.querySelector("#errorAlert");
             if(al != null){
-                setTimeout(() => { al.remove(); }, 3000);
+                setTimeout(() => { al.remove(); }, 5000);
             }
         });
     </script>
