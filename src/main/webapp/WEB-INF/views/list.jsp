@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Leaves application</title>
+<title>requests</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -22,50 +22,43 @@
 			</div>
 		</c:if>
 
-		<div class="h3 text-primary mt-5">Leaves Application List</div>
+		<div class="h3 text-primary mt-5">Vehicle Service Requests List</div>
 
 
 		<table class="table table-bordered table-striped mt-3">
 			<thead class="thead-dark">
 				<tr>
 					<th>Sl.#</th>
-					<th>Date Applied</th>
-					<th>First Name</th>
-					<th>Second Name</th>
-					<th>Leave Type</th>
-					<th>Days entitled</th>
-					<th>From</th>
-					<th>To</th>
-					<th>Total Days</th>
-					<th>Remainder</th>
-					<th>Reason</th>
-					<th>Status</th>
+					<th>Customer Name</th>
+					<th>Vehicle Manufacturer</th>
+					<th>Model</th>
+					<th>Service Type</th>
+					<th>Sub Type</th>
+					<th>Priority</th>
+					<th>Scheduled Date</th>
+					<th>Vehicle File</th>
+					<th>Created On</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${leaves}" var="a" varStatus="counter">
+				<c:forEach items="${requests}" var="a" varStatus="counter">
 				
 					<tr>
 						<td>${counter.count}</td>
-						<td>${a.appliedOn}</td>
-
-						<td>${a.employee.firstName}</td>
-						<td>${a.employee.lastName}</td>
-						<td>${a.leaveType.leaveTypeName}</td>
-						<td>${entitled[a.leaveApplicationId]}</td>
-						
-						<td>${a.fromDateFormatted}</td>
-						<td>${a.toDateFormatted}</td>
-						<td>${a.totalDays}</td>
-						<td>${remainder[a.leaveApplicationId]}</td>
-						
-						<td>${a.reason}</td>
-						<td>${a.status}</td>
+						<td>${a.customerName}</td>
+						<td>${a.manufacturer.manufacturerName}</td>
+						<td>${a.vehicleModel.modelName}</td>
+						<td>${a.serviceType.serviceTypeName}</td>
+						<td>${a.serviceSubType.serviceSubTypeName}</td>
+						<td>${a.priority}</td>
+						<td>${a.scheduledDate}</td>						
+						<td>${a.attachmentPath}</td>	
+						<td>${a.createdAt}</td>
 
 
 						<td><a
-							href="./delete-leave?leaveApplicationId=${a.leaveApplicationId}"
+							href="./delete?serviceRequestId=${a.serviceRequestId}"
 							class="text-danger">Delete</a></td>
 					</tr>
 				</c:forEach>
@@ -75,8 +68,8 @@
 	</div>
 
 	<div class="h3 text-warn m-5">
-		Click <a href="./leave-application-form"> here </a> to apply for a
-		leave
+		Click <a href="./create"> here </a> to apply for a
+		service request
 	</div>
 
 

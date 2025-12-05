@@ -1,5 +1,6 @@
 package tech.csm.vsreq.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +100,20 @@ public class VehicleServiceRequestController {
 		rd.addFlashAttribute("msg", msg);
 		return "redirect:create";
 
+	}
+	
+	//get requests list
+	@GetMapping("/")
+	public String getServiceRequests(Model model) {
+		List<ServiceRequest> requests = serviceRequestService.getAllRequests();
+		
+		//if null(no request), return an empty list
+		if(requests==null) {
+			requests =  Collections.emptyList();
+		}
+		
+		model.addAttribute("requests", requests);			
+		return "list";
 	}
 
 }

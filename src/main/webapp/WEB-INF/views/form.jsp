@@ -95,7 +95,7 @@
 
 						<!--service sub type -->
 						<div class="col-6 mb-3">
-							<label for="serviceSubTypeId" class="font-weight-bold">Service
+							<label for="serviceSubTypeId" class="font-weight-bold">
 								Sub Type</label> <select id="serviceSubTypeId"
 								name="serviceSubType.serviceSubTypeId" class="form-control"
 								required>
@@ -159,7 +159,7 @@ s								  <option value="${p}">${p}</option>
 	</div>
 
 	<div class="h3 text-warn m-5">
-		Click <a href="./get-applied-leaves"> here </a> to view requests
+		Click <a href="./"> here </a> to view requests
 	</div>
 	
 	<!-- script for conditional UI if priority='scheduled' show date -->
