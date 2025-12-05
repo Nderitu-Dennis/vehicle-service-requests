@@ -83,7 +83,7 @@ public class VehicleServiceRequestController {
     	ServiceRequest savedRequest = serviceRequestService.saveRequest(request);
     	String msg =  savedRequest.getCustomerName() + " ,your request is being processed";
     	rd.addFlashAttribute("msg", msg);
-        return "redirect:/requests/create";
+    	return "redirect:create";
     	
     	
     }
