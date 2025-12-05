@@ -26,15 +26,6 @@ import tech.csm.vsreq.service.ServiceSubTypeService;
 import tech.csm.vsreq.service.ServiceTypeService;
 import tech.csm.vsreq.service.VehicleModelService;
 
-/*
-•	GET /requests → Show list page
-•	GET /requests/create → Create form
-•	POST /requests/save → Save form with file upload
-•	GET /requests/delete → Delete
-•	AJAX endpoints:
-o	/requests/models?manufacturerId=
-o	/requests/subtypes?serviceTypeId=
-*/
 
 @Controller
 @RequestMapping("/requests")
@@ -84,36 +75,48 @@ public class VehicleServiceRequestController {
 	@PostMapping("/save")
 	public String saveRequest(@Valid @ModelAttribute ServiceRequest request,
 			BindingResult rs,
-			RedirectAttributes rd
-			) {
+			RedirectAttributes rd) {
 //		run validations first
-		
+
 		if (rs.hasErrors()) {
 			rd.addFlashAttribute("validationErrors", rs.getAllErrors());
-			return "redirect:create";
+			return "redirect:/requests/create";
 
 		}
-		
+
 //		proceed to save after validations		
 		ServiceRequest savedRequest = serviceRequestService.saveRequest(request);
 		String msg = savedRequest.getCustomerName() + ", your request is being processed";
 		rd.addFlashAttribute("msg", msg);
-		return "redirect:create";
+		return "redirect:/requests/create";
 
 	}
-	
-	//get requests list
-	@GetMapping("/")
-	public String getServiceRequests(Model model) {
+
+	// get requests list
+	@GetMapping("")
+	public String getServiceRequests(Model model, RedirectAttributes rd) {
 		List<ServiceRequest> requests = serviceRequestService.getAllRequests();
-		
-		//if null(no request), return an empty list
-		if(requests==null) {
-			requests =  Collections.emptyList();
+
+		// if null(no request), return an empty list
+		if (requests == null) {
+			requests = Collections.emptyList();
+			String msg ="nothing to display here";
+			rd.addFlashAttribute("msg",msg);
 		}
-		
-		model.addAttribute("requests", requests);			
+
+		model.addAttribute("requests", requests);
 		return "list";
+	}
+
+	// delete =vsreqs/requests/delete/serviceRequestId
+	@GetMapping("/delete")
+	public String deleteRequest(@RequestParam("serviceRequestId") Integer serviceRequestId,
+			RedirectAttributes rd) {
+		serviceRequestService.deleteRequestById(serviceRequestId);
+		String msg = "Request deleted successfully";
+		rd.addFlashAttribute("msg", msg);
+		//return "list";
+		return "redirect:/requests";
 	}
 
 }

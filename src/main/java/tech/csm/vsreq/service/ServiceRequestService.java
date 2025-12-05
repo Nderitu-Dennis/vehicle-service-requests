@@ -23,4 +23,8 @@ public class ServiceRequestService {
 		
 	}
 
+	public void deleteRequestById(Integer serviceRequestId) {
+		serviceRequestRepository.deleteById(serviceRequestId);	
+}
+
 }

@@ -58,7 +58,7 @@
 
 
 						<td><a
-							href="./delete?serviceRequestId=${a.serviceRequestId}"
+							href="/vsreqs/requests/delete?serviceRequestId=${a.serviceRequestId}"
 							class="text-danger">Delete</a></td>
 					</tr>
 				</c:forEach>
@@ -68,7 +68,7 @@
 	</div>
 
 	<div class="h3 text-warn m-5">
-		Click <a href="./create"> here </a> to apply for a
+		Click <a href="/vsreqs/requests/create"> here </a> to apply for a
 		service request
 	</div>
 

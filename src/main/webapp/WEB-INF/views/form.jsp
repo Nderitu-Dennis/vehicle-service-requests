@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +37,9 @@
 			<div class="card-header h2 bg-info">Vehicle Service Request
 				Form</div>
 			<div class="card-body">
-				<form id="serviceRequestForm" action="./save" method="post">
+				<form id="serviceRequestForm"
+				 action="/vsreqs/requests/save" 
+				 method="post">
 					<!-- manufacturer Dropdown -->
 					<div class="row">
 					
@@ -159,7 +162,7 @@ s								  <option value="${p}">${p}</option>
 	</div>
 
 	<div class="h3 text-warn m-5">
-		Click <a href="./"> here </a> to view requests
+		Click <a href="/vsreqs/requests"> here </a> to view requests
 	</div>
 	
 	<!-- script for conditional UI if priority='scheduled' show date -->
