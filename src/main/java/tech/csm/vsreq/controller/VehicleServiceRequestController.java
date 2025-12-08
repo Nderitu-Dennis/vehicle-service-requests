@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -84,7 +87,7 @@ public class VehicleServiceRequestController {
 	@PostMapping("/save")
 	public String saveRequest(@Valid @ModelAttribute ServiceRequest request,
 			BindingResult rs,
-			@RequestParam("attachmentPath") MultipartFile attachmentPath,
+			@RequestParam("file") MultipartFile file,
 			RedirectAttributes rd) {
 //		run validations first
 
@@ -95,9 +98,12 @@ public class VehicleServiceRequestController {
 
 		}
 		
-		//  Upload file
+		//  Upload file only if present
+		if(file != null && !file.isEmpty()) {
 	    String uploadedFileName = fileUtil.uploadFile(file);
 	    request.setAttachmentPath(uploadedFileName);
+	    System.out.println("uploaded file name " + uploadedFileName +"\ndir path from FileUtil " + fileUtil.getDirPath());
+		}
 
 //		proceed to save after validations		
 		ServiceRequest savedRequest = serviceRequestService.saveRequest(request);

@@ -53,7 +53,7 @@
 						<td>${a.serviceSubType.serviceSubTypeName}</td>
 						<td>${a.priority}</td>
 						<td>${a.scheduledDate}</td>	
-						<td><a href="./download?attachmentPath=${a.attachmentPath}" class="btn btn-success"> download </a></td>						
+						<td><a href="/vsreqs/requests/download?attachmentPath=${a.attachmentPath}">${a.attachmentPath} </a></td>						
 											
 						<td>${a.createdAt}</td>
 

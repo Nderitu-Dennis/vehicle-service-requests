@@ -137,9 +137,9 @@ s								  <option value="${p}">${p}</option>
 						<!-- attachment-->
 
 						<div class="col-4 mb-3">
-							<label for="attachmentPath" class="font-weight-bold">Upload
+							<label for="file" class="font-weight-bold">Upload
 								any vehicle file</label>
-								 <input type="file" name="attachmentPath" id="attachmentPath"
+								 <input type="file" name="file" id="file"
 								class="form-control">
 							<div class="invalid-feedback">Please upload a file</div>
 

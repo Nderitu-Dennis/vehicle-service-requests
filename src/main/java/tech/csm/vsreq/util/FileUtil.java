@@ -1,5 +1,6 @@
 package tech.csm.vsreq.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,6 +25,12 @@ public class FileUtil {
 
     // upload the file and return filename
     public String uploadFile(MultipartFile file) {
+    	  // Create directory if it doesn't exist
+        File directory = new File(uploadDir);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        
         String fileName = file.getOriginalFilename();
         Path destination = Paths.get(uploadDir + fileName);
 
