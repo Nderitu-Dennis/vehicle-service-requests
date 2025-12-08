@@ -1,9 +1,12 @@
 package tech.csm.vsreq.controller;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
@@ -25,6 +29,7 @@ import tech.csm.vsreq.service.ServiceRequestService;
 import tech.csm.vsreq.service.ServiceSubTypeService;
 import tech.csm.vsreq.service.ServiceTypeService;
 import tech.csm.vsreq.service.VehicleModelService;
+import tech.csm.vsreq.util.FileUtil;
 
 
 @Controller
@@ -45,6 +50,10 @@ public class VehicleServiceRequestController {
 
 	@Autowired
 	private ServiceRequestService serviceRequestService;
+	
+	//injecting file util
+	@Autowired
+	private FileUtil fileUtil;
 
 	// create service request form
 	@GetMapping("/create")
@@ -75,14 +84,20 @@ public class VehicleServiceRequestController {
 	@PostMapping("/save")
 	public String saveRequest(@Valid @ModelAttribute ServiceRequest request,
 			BindingResult rs,
+			@RequestParam("attachmentPath") MultipartFile attachmentPath,
 			RedirectAttributes rd) {
 //		run validations first
 
 		if (rs.hasErrors()) {
 			rd.addFlashAttribute("validationErrors", rs.getAllErrors());
+			System.out.println("Error occured: " + rs.getAllErrors());
 			return "redirect:/requests/create";
 
 		}
+		
+		//  Upload file
+	    String uploadedFileName = fileUtil.uploadFile(file);
+	    request.setAttachmentPath(uploadedFileName);
 
 //		proceed to save after validations		
 		ServiceRequest savedRequest = serviceRequestService.saveRequest(request);
@@ -91,6 +106,29 @@ public class VehicleServiceRequestController {
 		return "redirect:/requests/create";
 
 	}
+	
+//	file download 
+	@GetMapping("/download")
+	public ResponseEntity<Resource> downloadFile(@RequestParam("attachmentPath") String fileName) {
+
+	    try {
+	        Path filePath = Paths.get(fileUtil.getDirPath() + fileName);
+	        Resource resource = new UrlResource(filePath.toUri());
+
+	        if (!resource.exists()) {
+	            return ResponseEntity.notFound().build();
+	        }
+
+	        return ResponseEntity.ok()
+	                .header(HttpHeaders.CONTENT_DISPOSITION,
+	                        "attachment; filename=" + resource.getFilename())
+	                .body(resource);
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error downloading file", e);
+	    }
+	}
+
 
 	// get requests list
 	@GetMapping("")

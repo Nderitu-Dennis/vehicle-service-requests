@@ -11,7 +11,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-info">
 	<div class="container mt-5">
 
 		<!-- Success Message -->
@@ -20,15 +20,15 @@
 				<span class='font-weight-bold'>Message: </span> ${msg}
 			</div>
 		</c:if>
-		
-			<!-- validation errors Message -->
+
+		<!-- validation errors Message -->
 		<c:if test="${validationErrors ne null}">
 			<div id='errorAlert' class='alert alert-danger' role="alert">
-			   <ul>
-            <c:forEach var="err" items="${validationErrors}">
-               <li>   Error: ${err.defaultMessage}</li>
-            </c:forEach>
-        </ul>
+				<ul>
+					<c:forEach var="err" items="${validationErrors}">
+						<li>Error: ${err.defaultMessage}</li>
+					</c:forEach>
+				</ul>
 			</div>
 		</c:if>
 
@@ -37,23 +37,20 @@
 			<div class="card-header h2 bg-info">Vehicle Service Request
 				Form</div>
 			<div class="card-body">
-				<form id="serviceRequestForm"
-				 action="/vsreqs/requests/save" 
-				 method="post">
+				<form id="serviceRequestForm" action="/vsreqs/requests/save"
+					method="post" enctype="multipart/form-data">
 					<!-- manufacturer Dropdown -->
 					<div class="row">
-					
-											
-					<!-- customer name -->
-					<div class="col-4 mb-3">
-					<label for="customerName" class="font-weight-bold">Customer Name</label>
-					<input type="text" name="customerName" id="customerName" 
-					class="form-control"
-					 required
-					 minlength="3"
-					 pattern="[A-Za-z\s]+"
-					 title="Must contain only letters and at least 3 characters ">
-					</div>
+
+
+						<!-- customer name -->
+						<div class="col-4 mb-3">
+							<label for="customerName" class="font-weight-bold">Customer
+								Name</label> <input type="text" name="customerName" id="customerName"
+								class="form-control" required minlength="3"
+								pattern="[A-Za-z\s]+"
+								title="Must contain only letters and at least 3 characters ">
+						</div>
 
 						<div class="col-4 mb-3">
 							<label for="manufacturerId" class="font-weight-bold">Manufacturer</label>
@@ -71,7 +68,8 @@
 						<!-- model Dropdown -->
 						<div class="col-4 mb-3">
 							<label for="modelId" class="font-weight-bold">Model</label> <select
-								id="modelId" name="vehicleModel.modelId" class="form-control" required>
+								id="modelId" name="vehicleModel.modelId" class="form-control"
+								required>
 								<option value="">-select-</option>
 							</select>
 							<div class="invalid-feedback">Please select a model</div>
@@ -115,8 +113,8 @@
 						<!-- enum priority -->
 
 						<div class="col-4 mb-3">
-							<label for="priority" class="font-weight-bold">Priority</label>
-							 <select name="priority" id="priority" class="form-control" required>
+							<label for="priority" class="font-weight-bold">Priority</label> <select
+								name="priority" id="priority" class="form-control" required>
 								<option value="">-select-</option>
 								<c:forEach var="p" items="${priorities}">
 s								  <option value="${p}">${p}</option>
@@ -128,19 +126,21 @@ s								  <option value="${p}">${p}</option>
 						<!-- date-->
 						<!--Conditional UI Field: If Priority = "SCHEDULED" → show Date picker
              Otherwise hide it.-->
-						<div class="col-4 mb-3" id="scheduledDateWrapper" style="display:none;">
-					    <label for="scheduledDate" class="font-weight-bold">Schedule date</label>
-							    <input type="date" name="scheduledDate" id="scheduledDate" class="form-control">
+						<div class="col-4 mb-3" id="scheduledDateWrapper"
+							style="display: none;">
+							<label for="scheduledDate" class="font-weight-bold">Schedule
+								date</label> <input type="date" name="scheduledDate" id="scheduledDate"
+								class="form-control">
 						</div>
 
 
 						<!-- attachment-->
 
 						<div class="col-4 mb-3">
-							<label for="attachmentPathId" class="font-weight-bold">Upload
-								any vehicle file</label> 
-								<input type="file" name=attachmentPathId
-								class="form-control" >
+							<label for="attachmentPath" class="font-weight-bold">Upload
+								any vehicle file</label>
+								 <input type="file" name="attachmentPath" id="attachmentPath"
+								class="form-control">
 							<div class="invalid-feedback">Please upload a file</div>
 
 
@@ -164,7 +164,7 @@ s								  <option value="${p}">${p}</option>
 	<div class="h3 text-warn m-5">
 		Click <a href="/vsreqs/requests"> here </a> to view requests
 	</div>
-	
+
 	<!-- script for conditional UI if priority='scheduled' show date -->
 	<script>
     document.getElementById("priority").addEventListener("change", function () {
@@ -182,7 +182,7 @@ s								  <option value="${p}">${p}</option>
         }
     });
 </script>
-	
+
 
 	<script src="https://code.jquery.com/jquery-2.2.4.js"
 		crossorigin="anonymous"></script>

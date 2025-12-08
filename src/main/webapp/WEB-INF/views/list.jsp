@@ -35,7 +35,7 @@
 					<th>Service Type</th>
 					<th>Sub Type</th>
 					<th>Priority</th>
-					<th>Scheduled Date</th>
+					<th>Scheduled Date</th>			
 					<th>Vehicle File</th>
 					<th>Created On</th>
 					<th>Action</th>
@@ -52,8 +52,9 @@
 						<td>${a.serviceType.serviceTypeName}</td>
 						<td>${a.serviceSubType.serviceSubTypeName}</td>
 						<td>${a.priority}</td>
-						<td>${a.scheduledDate}</td>						
-						<td>${a.attachmentPath}</td>	
+						<td>${a.scheduledDate}</td>	
+						<td><a href="./download?attachmentPath=${a.attachmentPath}" class="btn btn-success"> download </a></td>						
+											
 						<td>${a.createdAt}</td>
 
 
