@@ -140,7 +140,10 @@ s								  <option value="${p}">${p}</option>
 							<label for="file" class="font-weight-bold">Upload
 								any vehicle file</label>
 								 <input type="file" name="file" id="file"
-								class="form-control">
+								class="form-control"
+								accept=".png,.jpg,.jpeg,.pdf">
+								<small class="form-text text-muted">Max 10MB. PNG, JPG, JPEG, PDF only</small>
+								
 							<div class="invalid-feedback">Please upload a file</div>
 
 

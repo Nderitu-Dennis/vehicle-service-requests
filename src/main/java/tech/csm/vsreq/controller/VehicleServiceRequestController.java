@@ -93,16 +93,26 @@ public class VehicleServiceRequestController {
 
 		if (rs.hasErrors()) {
 			rd.addFlashAttribute("validationErrors", rs.getAllErrors());
-			System.out.println("Error occured: " + rs.getAllErrors());
 			return "redirect:/requests/create";
 
 		}
 		
 		//  Upload file only if present
 		if(file != null && !file.isEmpty()) {
+	        String contentType = file.getContentType();
+
+			  // check file type
+	        if (contentType == null || 
+	            !(contentType.equals("image/png") || 
+	              contentType.equals("image/jpg") || 
+	              contentType.equals("image/jpeg") || 
+	              contentType.equals("application/pdf"))) {
+	            
+	            rd.addFlashAttribute("validationErrors", "Only PNG, JPG, JPEG, PDF files allowed");
+	            return "redirect:/requests/create";
+	        }
 	    String uploadedFileName = fileUtil.uploadFile(file);
 	    request.setAttachmentPath(uploadedFileName);
-	    System.out.println("uploaded file name " + uploadedFileName +"\ndir path from FileUtil " + fileUtil.getDirPath());
 		}
 
 //		proceed to save after validations		

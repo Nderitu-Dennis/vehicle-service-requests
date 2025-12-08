@@ -12,7 +12,6 @@ public class VehicleServiceRequestsApplication {
 		SpringApplication.run(VehicleServiceRequestsApplication.class, args);
 	}
 	
-	//todo- multiparts
 	//todo- when to use @Transactional in service & DB operations
 	//todo-check cascading ajax fields-the 2nd ones
 	
