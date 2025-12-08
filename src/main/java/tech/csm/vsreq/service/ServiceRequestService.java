@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tech.csm.vsreq.model.ServiceRequest;
 import tech.csm.vsreq.repository.ServiceRequestRepository;
@@ -14,6 +15,7 @@ public class ServiceRequestService {
 	@Autowired
 	private ServiceRequestRepository  serviceRequestRepository;
 
+	@Transactional
 	public ServiceRequest saveRequest(ServiceRequest request) {
 		return serviceRequestRepository.save(request);
 	}
@@ -23,6 +25,7 @@ public class ServiceRequestService {
 		
 	}
 
+	@Transactional
 	public void deleteRequestById(Integer serviceRequestId) {
 		serviceRequestRepository.deleteById(serviceRequestId);	
 }

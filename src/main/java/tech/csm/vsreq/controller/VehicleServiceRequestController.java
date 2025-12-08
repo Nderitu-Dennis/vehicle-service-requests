@@ -97,6 +97,19 @@ public class VehicleServiceRequestController {
 
 		}
 		
+		 // Validate  child entities
+			
+		if (request.getVehicleModel().getModelId() == 0) {
+		    rd.addFlashAttribute("error", "Please select a valid vehicle model");
+		    return "redirect:/requests/create";
+		}
+
+		if (request.getServiceSubType().getServiceSubTypeId() == 0) {
+		    rd.addFlashAttribute("error", "Please select a valid service sub type");
+		    return "redirect:/requests/create";
+		}
+
+	    
 		//  Upload file only if present
 		if(file != null && !file.isEmpty()) {
 	        String contentType = file.getContentType();
@@ -108,7 +121,7 @@ public class VehicleServiceRequestController {
 	              contentType.equals("image/jpeg") || 
 	              contentType.equals("application/pdf"))) {
 	            
-	            rd.addFlashAttribute("validationErrors", "Only PNG, JPG, JPEG, PDF files allowed");
+	            rd.addFlashAttribute("error", "Only PNG, JPG, JPEG, PDF files allowed");
 	            return "redirect:/requests/create";
 	        }
 	    String uploadedFileName = fileUtil.uploadFile(file);

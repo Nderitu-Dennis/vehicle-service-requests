@@ -17,9 +17,15 @@
 		<!-- Success Message -->
 		<c:if test="${msg ne null}">
 			<div id='successAlert' class='alert alert-success' role="alert">
-				<span class='font-weight-bold'>Message: </span> ${msg}
+				<span class='font-weight-bold'>Success: </span> ${msg}
 			</div>
 		</c:if>
+		
+		<c:if test="${error ne null}">
+    <div id="errorAlert" class="alert alert-danger">
+        <span class="font-weight-bold">Error: </span> ${error}
+    </div>
+</c:if>
 
 		<!-- validation errors Message -->
 		<c:if test="${validationErrors ne null}">
