@@ -60,7 +60,8 @@
 
 						<td><a
 							href="/vsreqs/requests/delete?serviceRequestId=${a.serviceRequestId}"
-							class="text-danger">Delete</a></td>
+							class="text-danger"
+							onclick="return confirm('Delete this record?')">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

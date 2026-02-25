@@ -16,7 +16,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="model")
+@Table(name="vehicle_model")
 @Getter
 @Setter
 @ToString
