@@ -45,21 +45,25 @@
 			<div class="card-body">
 				<form id="serviceRequestForm" action="/vsreqs/requests/save"
 					method="post" enctype="multipart/form-data">
+
 					<!-- manufacturer Dropdown -->
 					<div class="row">
-
 
 						<!-- customer name -->
 						<div class="col-4 mb-3">
 							<label for="customerName" class="font-weight-bold">Customer
-								Name</label> <input type="text" name="customerName" id="customerName"
-								class="form-control" required minlength="3"
+								Name <span class="text-danger">*</span>
+								</label>
+								 <input type="text" name="customerName" id="customerName"
+								class="form-control"
+								 required
+								 minlength="3"
 								pattern="[A-Za-z\s]+"
 								title="Must contain only letters and at least 3 characters ">
 						</div>
 
 						<div class="col-4 mb-3">
-							<label for="manufacturerId" class="font-weight-bold">Manufacturer</label>
+							<label for="manufacturerId" class="font-weight-bold">Manufacturer <span class="text-danger">*</span></label>
 							<select id="manufacturerId" name="manufacturer.manufacturerId"
 								class="form-control" required>
 								<option value="">-select-</option>
@@ -68,12 +72,14 @@
 
 								</c:forEach>
 							</select>
-							<div class="invalid-feedback">Please select a department</div>
+							<div class="invalid-feedback">Please select a manufacturer</div>
 						</div>
 
 						<!-- model Dropdown -->
 						<div class="col-4 mb-3">
-							<label for="modelId" class="font-weight-bold">Model</label> <select
+							<label for="modelId" class="font-weight-bold">Model <span class="text-danger">*</span>
+							</label>
+							 <select
 								id="modelId" name="vehicleModel.modelId" class="form-control"
 								required>
 								<option value="">-select-</option>
@@ -86,7 +92,8 @@
 						<!-- service type Dropdown -->
 						<div class="col-6 mb-3">
 							<label for="serviceTypeId" class="font-weight-bold">Service
-								Type </label> <select id="serviceTypeId"
+								Type <span class="text-danger">*</span>
+								</label> <select id="serviceTypeId"
 								name="serviceType.serviceTypeId" class="form-control" required>
 								<!-- check on this object things -->
 								<option value="">-select-</option>
@@ -103,7 +110,8 @@
 						<!--service sub type -->
 						<div class="col-6 mb-3">
 							<label for="serviceSubTypeId" class="font-weight-bold">
-								Sub Type</label> <select id="serviceSubTypeId"
+								Sub Type <span class="text-danger">*</span>
+								</label> <select id="serviceSubTypeId"
 								name="serviceSubType.serviceSubTypeId" class="form-control"
 								required>
 								<option value="">-select-</option>
@@ -119,7 +127,9 @@
 						<!-- enum priority -->
 
 						<div class="col-4 mb-3">
-							<label for="priority" class="font-weight-bold">Priority</label> <select
+							<label for="priority" class="font-weight-bold">Priority
+							</label>
+							 <select
 								name="priority" id="priority" class="form-control" required>
 								<option value="">-select-</option>
 								<c:forEach var="p" items="${priorities}">
@@ -156,21 +166,16 @@ s								  <option value="${p}">${p}</option>
 						</div>
 					</div>
 
-
 					<div class="text-center mt-3">
 						<input type="submit" class="btn btn-success" value="Save">
 						<input type="reset" class="btn btn-warning" value="Reset">
 					</div>
 				</form>
-
-
 			</div>
 		</div>
-
-
 	</div>
 
-	<div class="h3 text-warn m-5">
+	<div class="h4 text-warn mx-4 my-2">
 		Click <a href="/vsreqs/requests"> here </a> to view requests
 	</div>
 
